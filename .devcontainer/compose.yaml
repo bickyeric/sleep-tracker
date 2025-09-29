@@ -1,0 +1,34 @@
+services:
+  rails-app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    environment:
+      DATABASE_URL: postgres://sleep_tracker:supersecretpassword123@db:5432/sleep_tracker_dev
+
+    volumes:
+      - ../..:/workspaces:cached
+      - bundle:/usr/local/bundle
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: sleep_tracker
+      POSTGRES_PASSWORD: supersecretpassword123
+      POSTGRES_DB: sleep_tracker_dev
+    volumes:
+      - db:/var/lib/postgresql/data
+
+    ports:
+      - "5433:5432"
+
+volumes:
+  db:
+  bundle:
