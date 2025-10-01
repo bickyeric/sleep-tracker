@@ -5,7 +5,11 @@ services:
       dockerfile: .devcontainer/Dockerfile
 
     environment:
-      DATABASE_URL: postgres://sleep_tracker:supersecretpassword123@db:5432/sleep_tracker_dev
+      DATABASE_USERNAME: sleep_tracker
+      DATABASE_PASSWORD: supersecretpassword123
+      DATABASE_NAME: sleep_tracker_dev
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
 
     volumes:
       - ../..:/workspaces:cached
