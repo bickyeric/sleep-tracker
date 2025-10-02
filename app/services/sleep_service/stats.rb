@@ -7,7 +7,6 @@ module SleepService
 
     def perform
       Rails.cache.fetch("user#{@user.id}_sleep_stats_#{@period.inspect}", expires_in: 1.hour) do
-        # todo: check if this is optimized
         summaries = Sleep::Summary.where(user_id: @user.id).where('date > ?', @period.ago)
 
         total_minutes = summaries.sum(&:total_sleep_duration_minutes)
