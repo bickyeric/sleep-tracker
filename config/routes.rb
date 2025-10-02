@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         post 'follow' => 'users/follows#create'
         delete 'follow' => 'users/follows#destroy'
       end
+
+      resources :sleeps, only: [:create] do
+        post :end
+      end
     end
   end
 end

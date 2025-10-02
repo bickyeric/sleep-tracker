@@ -10,6 +10,8 @@ module SleepService
 
       s = Sleep.new(user_id: @user.id, sleep_start: @start_time)
       s.save!
+
+      s
     end
   end
 end
