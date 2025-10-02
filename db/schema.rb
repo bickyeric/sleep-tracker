@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_01_142208) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_02_124404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,12 +24,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_01_142208) do
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
+  create_table "sleep_summaries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.integer "total_sleep_duration_minutes"
+    t.integer "total_sleep_sessions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "date"], name: "index_sleep_summaries_on_user_id_and_date", unique: true
+  end
+
   create_table "sleeps", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "sleep_start", null: false
     t.datetime "sleep_end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "sleep_start"], name: "index_sleeps_on_user_id_and_sleep_start"
     t.index ["user_id"], name: "index_sleeps_on_user_id_where_sleep_end_null", where: "(sleep_end IS NULL)"
   end
 
