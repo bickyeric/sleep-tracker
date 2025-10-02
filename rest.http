@@ -1,5 +1,5 @@
 # user token
-@accesstoken=101
+@accesstoken=1
 
 @baseurl=http://127.0.0.1:3000
 
@@ -17,7 +17,7 @@ curl '{{baseurl}}/api/v1/sleeps?limit=2&cursor=105' \
 
 
 ### get friend_feeds
-curl '{{baseurl}}/api/v1/sleeps/friend_feeds' \
+curl '{{baseurl}}/api/v1/sleeps/friend_feeds?cursor=1129&limit=2' \
   -H "Authorization: {{accesstoken}}"
 
 

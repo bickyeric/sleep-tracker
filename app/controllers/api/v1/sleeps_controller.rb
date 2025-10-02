@@ -21,19 +21,24 @@ class Api::V1::SleepsController < ApplicationController
     cursor = params['cursor'].to_i || 0
     limit = [params['limit']&.to_i || 10, 100].min
 
-    # todo: not optimized yet
     sleeps = Sleep.where(user_id: current_user.id).where('id > ?', cursor).order(:created_at).limit(limit)
     render json: { data: sleeps }
   end
 
   def friend_feeds
-    sleeps = SleepService.friend_feed(user: current_user)
+    cursor = params['cursor'].to_i || 0
+    limit = [params['limit']&.to_i || 10, 50].min
+
+    sleeps = Sleep.includes(:user)
+                .where(user: current_user.following)
+                .where(created_at: 1.week.ago..Time.current)
+                .where.not(sleep_end: nil)
+                .order(:duration_seconds)
+                .where('duration_seconds > ?', cursor)
+                .limit(limit)
 
     render json: {
-      data: ActiveModel::Serializer::CollectionSerializer.new(sleeps, serializer: SleepSerializer),
-      meta: {
-        cached: true
-      }
+      data: ActiveModel::Serializer::CollectionSerializer.new(sleeps, serializer: SleepSerializer)
     }
   end
 
