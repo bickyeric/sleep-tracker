@@ -36,4 +36,8 @@ class Api::V1::SleepsController < ApplicationController
       }
     }
   end
+
+  def stats
+    render json: { data: SleepService.stats(user: current_user, period: 1.month) }
+  end
 end

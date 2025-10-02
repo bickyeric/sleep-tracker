@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       end
 
       get '/sleeps/friend_feeds' => 'sleeps#friend_feeds'
+      get '/sleeps/stats' => 'sleeps#stats'
       resources :sleeps, only: [:create, :index] do
         post :end
       end

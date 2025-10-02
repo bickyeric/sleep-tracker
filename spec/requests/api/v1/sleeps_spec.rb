@@ -101,4 +101,24 @@ RSpec.describe Api::V1::SleepsController, type: :request do
       end
     end
   end
+
+  describe 'GET /api/v1/sleeps/stats' do
+    context 'when success return sleeps stats' do
+      before do
+      create(:sleep_summary, user_id: user.id, date: Date.yesterday, total_sleep_duration_minutes: 120, total_sleep_sessions: 1)
+      create(:sleep_summary, user_id: user.id, date: Date.today, total_sleep_duration_minutes: 30, total_sleep_sessions: 1)
+    end
+
+      it 'returns sleep stats' do
+        get api_v1_sleeps_stats_path, headers: headers
+
+        expect(response).to have_http_status(:ok)
+        response_json = JSON.parse(response.body)
+        expect(response_json['data']['total_days']).to eq(2)
+        expect(response_json['data']['total_sleep_duration_minutes']).to eq(150)
+        expect(response_json['data']['total_number_of_sleep_sessions']).to eq(2)
+        expect(response_json['data']['total_sleep_duration_hours']).to eq(2)
+      end
+    end
+  end
 end
