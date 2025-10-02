@@ -3,8 +3,12 @@ module SleepService
     def initialize(msg = 'active sleep is exist'); super; end
   end
 
-  class ActiveSleepNotFoundError < Service::Error::Base
-    def initialize(msg = 'active sleep is not found'); super; end
+  class SleepNotFoundError < Service::Error::Base
+    def initialize(msg = 'sleep is not found'); super; end
+  end
+
+  class SleepEndedError < Service::Error::Base
+    def initialize(msg = 'sleep is already ended'); super; end
   end
 
   module_function
