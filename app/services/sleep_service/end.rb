@@ -12,6 +12,7 @@ module SleepService
       raise SleepService::SleepEndedError unless s.sleep_end.nil?
 
       s.sleep_end = @end_time
+      s.duration_seconds = (s.sleep_end - s.sleep_start).to_i
       s.save!
 
       UpsertSleepSummaryJob.perform_later(@user.id, Date.current)

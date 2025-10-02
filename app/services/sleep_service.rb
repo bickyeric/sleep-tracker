@@ -16,4 +16,5 @@ module SleepService
   def start(...); Start.new(...).perform; end
   def end(...); End.new(...).perform; end
   def upsert_summary(...); UpsertSummary.new(...).perform; end
+  def friend_feed(...); FriendFeed.new(...).perform; end
 end

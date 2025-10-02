@@ -23,11 +23,12 @@ RSpec.describe SleepService::End do
   end
 
   context 'when success end sleep record' do
-    before { create(:sleep, user_id: user.id, sleep_start: Time.now) }
+    let(:sleep) { create(:sleep, user: user, sleep_start: 1.day.ago) }
 
     it 'not raise error' do
       expect(UpsertSleepSummaryJob).to receive(:perform_later).with(user.id, anything)
       expect { subject }.not_to raise_error
+      expect(subject.duration_seconds).to eq(86400)
     end
   end
 end
