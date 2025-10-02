@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_02_143442) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_02_172011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -41,7 +41,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_02_143442) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration_seconds"
-    t.index ["user_id", "created_at", "id"], name: "idx_sleeps_user_id_created_at_id"
+    t.index ["user_id", "created_at", "duration_seconds"], name: "index_sleeps_on_user_id_and_created_at_and_duration_seconds"
+    t.index ["user_id", "created_at", "id"], name: "index_sleeps_on_user_id_and_created_at_and_id"
     t.index ["user_id", "created_at"], name: "idx_sleeps_user_id_created_at"
     t.index ["user_id", "sleep_start"], name: "index_sleeps_on_user_id_and_sleep_start"
     t.index ["user_id"], name: "index_sleeps_on_user_id_where_sleep_end_null", where: "(sleep_end IS NULL)"
