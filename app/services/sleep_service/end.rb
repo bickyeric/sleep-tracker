@@ -14,6 +14,8 @@ module SleepService
       s.sleep_end = @end_time
       s.save!
 
+      UpsertSleepSummaryJob.perform_later(@user.id, Date.current)
+
       s
     end
   end

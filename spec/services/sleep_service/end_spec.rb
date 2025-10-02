@@ -26,6 +26,7 @@ RSpec.describe SleepService::End do
     before { create(:sleep, user_id: user.id, sleep_start: Time.now) }
 
     it 'not raise error' do
+      expect(UpsertSleepSummaryJob).to receive(:perform_later).with(user.id, anything)
       expect { subject }.not_to raise_error
     end
   end
