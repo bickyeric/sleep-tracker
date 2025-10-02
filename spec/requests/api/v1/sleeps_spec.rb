@@ -66,4 +66,39 @@ RSpec.describe Api::V1::SleepsController, type: :request do
       end
     end
   end
+
+  describe 'GET /api/v1/sleeps' do
+    let!(:sleep1) { create(:sleep, user: user, sleep_start: 1.day.ago, created_at: 1.day.ago) }
+    let!(:sleep2) { create(:sleep, user: user, sleep_start: 2.day.ago, created_at: 2.day.ago) }
+
+    context 'without params' do
+      it 'returns all sleeps record' do
+        get api_v1_sleeps_path, headers: headers
+
+        expect(response).to have_http_status(:ok)
+        response_json = JSON.parse(response.body)
+        expect(response_json['data']).to have_attributes(:size => 2)
+      end
+    end
+
+    context 'with cursor' do
+      it 'returns filtered sleeps record' do
+        get api_v1_sleeps_path, params: {'cursor' => sleep1.id}, headers: headers
+
+        expect(response).to have_http_status(:ok)
+        response_json = JSON.parse(response.body)
+        expect(response_json['data']).to have_attributes(:size => 1)
+      end
+    end
+
+    context 'with limit' do
+      it 'returns filtered sleeps record' do
+        get api_v1_sleeps_path, params: {'limit' => 1}, headers: headers
+
+        expect(response).to have_http_status(:ok)
+        response_json = JSON.parse(response.body)
+        expect(response_json['data']).to have_attributes(:size => 1)
+      end
+    end
+  end
 end
