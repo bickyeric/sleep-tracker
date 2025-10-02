@@ -1,0 +1,26 @@
+# user token
+@accesstoken=1
+
+# service token
+# @accesstoken=eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzpoeWRyYS5qd3QuYWNjZXNzLXRva2VuIiwidHlwIjoiSldUIn0.eyJhdWQiOlsiaHR0cHM6Ly9zaGFyZWQtYXV0aC1kb21haW4ucHJvZC5jb3JlLmJ1a2EyMC1pbnRlcm5hbC5jb20iLCJodHRwczovL2ZpYy1kb21haW4ucHJvZC5jb3JlLmJ1a2EyMC1pbnRlcm5hbC5jb20iXSwiY2xpZW50X2lkIjoidnBub250cmFkZXJAYmwiLCJleHAiOjE3MzYzMzM1ODMsImV4dCI6eyJ0ZW5hbnRfaWQiOiJibCJ9LCJpYXQiOjE3MzYzMjk5ODMsImlzcyI6Imh0dHBzOi8vc2hhcmVkLWF1dGgtZG9tYWluLnByb2QuY29yZS5idWthMjAtaW50ZXJuYWwuY29tLyIsImp0aSI6Ijk0ZmEzMDc2LTdkZTMtNGRiYi1iOTE3LTBjOWM3N2M3MDY3MSIsIm5iZiI6MTczNjMyOTk4Mywic2NvcGUiOiJmaW5hbmNlLiouKiBhdXRoZW50aWNhdGlvbi4qLioiLCJzdWIiOiJ2cG5vbnRyYWRlckBibCJ9.ZUxFcW98K2VPqERW6mqbkfeIDiyid26ugtbb-sNWKEs3VeZYPr4W4WXplelnxkQcaefBQE5J68NITDiD0yxzzjeEctiYhfRi6iBm5Yb06tIut5MYtNl00e45n0RsDQUk_EzDmSBisNbptje9K6opK2e32Nt9HahF0dUYODcfPfFFbMpHKa6Jji-KlCMs6QoqZK3jk-XlZgE_ygwb9TOJ7SvGtcfTqzJU34f3D_YRqYd4H9YUAhW6X10rkC770_jPEZx0UnA4ExfBJqfj7Za5MsTg8cpFTNr-qM5cYp-hsLQ_YLIw1MQ8pA31aeJBbjK1ujBWMi7RmsLrvdHlr41uFpqLV8QsBWjendB2IRM2caspSaY57frKGId0oCFHEaJsrNIxTlzL4ipsU_IqWHphYqWDfTVAnPiLpuI-iokIwqA179-03LHaJutfqGFQjg_AKz-wz2FUAmx_mgZ5kS5BfZVnY3TurfbGGLwvBNdCe0XjErDneGPWCPo8fPvt4bJYQM_pOru0LEcL3-pckLkPmYfepMRQBeE44EKorK3B2TAc4V4ce_rOdEt9KjhtFQnRGP13aEFMvHfw7q3z2xU4C4tv_DeAInQ2BAolbeAWmR1fXDNDq-4e8XfnfL_1EqDx5jhi0V2E5VSMRs2EpqCA1gWy3Dok9p7wDHKwTgKxzb4
+
+@baseurl=http://127.0.0.1:3000
+
+### follow
+curl -XPOST {{baseurl}}/api/v1/users/2/follow \
+  -H "Authorization: {{accesstoken}}"
+
+### unfollow
+curl -XDELETE {{baseurl}}/api/v1/users/2/follow \
+  -H "Authorization: {{accesstoken}}"
+
+
+
+### get sleeps
+curl '{{baseurl}}/api/v1/sleeps?limit=2&cursor=105' \
+  -H "Authorization: {{accesstoken}}"
+
+
+### get friend_feeds
+curl '{{baseurl}}/api/v1/sleeps/friend_feeds' \
+  -H "Authorization: {{accesstoken}}"

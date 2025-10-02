@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         delete 'follow' => 'users/follows#destroy'
       end
 
+      get '/sleeps/friend_feeds' => 'sleeps#friend_feeds'
       resources :sleeps, only: [:create, :index] do
         post :end
       end

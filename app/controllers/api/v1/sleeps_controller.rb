@@ -25,4 +25,15 @@ class Api::V1::SleepsController < ApplicationController
     sleeps = Sleep.where(user_id: current_user.id).where('id > ?', cursor).order(:created_at).limit(limit)
     render json: { data: sleeps }
   end
+
+  def friend_feeds
+    sleeps = SleepService.friend_feed(user: current_user)
+
+    render json: {
+      data: ActiveModel::Serializer::CollectionSerializer.new(sleeps, serializer: SleepSerializer),
+      meta: {
+        cached: true
+      }
+    }
+  end
 end
