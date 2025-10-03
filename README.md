@@ -58,3 +58,4 @@ To simplify the app, authentication can be done by adding `Authorization` header
 2. **Background Task** is used to do heavy logic like updating sleep summary without blocking main thread
 3. **Database Index** is created for each frequent query patterns
 4. **Caching** is used on business logic which is rarely changed like periodic sleep statistic
+5. **Database Read Replicas** is used to separate the database connection between read & write operation, by doing this we can scale database for read or write independently. but this is not implemented yet
